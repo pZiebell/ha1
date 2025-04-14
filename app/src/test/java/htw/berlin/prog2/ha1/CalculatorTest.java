@@ -112,19 +112,19 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("should display result after dividing by negative Number")
+    @DisplayName("should display result after adding a negative Number")
     void failedTest1() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(4);
         calc.pressDigitKey(0);
-        calc.pressBinaryOperationKey("/");
+        calc.pressBinaryOperationKey("+");
         calc.pressNegativeKey();
         calc.pressDigitKey(2);
         calc.pressDigitKey(0);
         calc.pressEqualsKey();
 
-        String expected = "-2";
+        String expected = "20";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
