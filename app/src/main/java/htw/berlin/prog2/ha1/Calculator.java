@@ -87,6 +87,7 @@ public class Calculator {
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);
+        if(operation== "√" && pressedNegative==true) screen = "Error";
         if(screen.equals("NaN")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
 
@@ -101,8 +102,11 @@ public class Calculator {
      */
     public void pressDotKey() {
         if(!screen.contains(".")) screen = screen + ".";
-        dotScreen = screen;
-        pressedDotkey = true;
+        if(Double.parseDouble(screen)==latestValue){
+            pressedDotkey = true;
+            dotScreen = screen;
+        }
+
     }
 
     /**
@@ -130,10 +134,10 @@ public class Calculator {
         if(pressedDotkey==true){
             if(pressedNegative==false){
                 var result = switch(latestOperation) {
-                    case "+" -> latestValue + Double.parseDouble(dotScreen) + Double.parseDouble(screen);
-                    case "-" -> latestValue - Double.parseDouble(dotScreen) + Double.parseDouble(screen);
-                    case "x" -> latestValue * Double.parseDouble(dotScreen) + Double.parseDouble(screen);
-                    case "/" -> latestValue / Double.parseDouble(dotScreen) + Double.parseDouble(screen);
+                    case "+" -> latestValue + Double.parseDouble(dotScreen+screen);
+                    case "-" -> latestValue - Double.parseDouble(dotScreen+screen);
+                    case "x" -> latestValue * Double.parseDouble(dotScreen+screen);
+                    case "/" -> latestValue / Double.parseDouble(dotScreen+screen);
                     default -> throw new IllegalArgumentException();
                 };
                 screen = Double.toString(result);

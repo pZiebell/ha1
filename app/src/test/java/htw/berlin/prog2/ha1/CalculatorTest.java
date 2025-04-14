@@ -63,8 +63,10 @@ class CalculatorTest {
     void testSquareRootOfNegative() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(7);
+
         calc.pressNegativeKey();
+        calc.pressDigitKey(7);
+
         calc.pressUnaryOperationKey("√");
 
         String expected = "Error";
